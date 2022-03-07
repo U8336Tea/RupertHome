@@ -1,14 +1,12 @@
-#TODO: Maybe put these in a config file too?
 INITIAL_MESSAGES = [
     "G\\*ming was invented by Adolf Hitler. Prove me wrong.",
     "All g\\*mers are Nazis. This is a proven fact.",
-    "What's the difference between a g\\*mer and a pedophile? There is none! :rofl:",
+    "What's the difference between a g\\*mer and a pedophile? There *is* none! :rofl:",
     "@everyone Nazi g\\*mers can KISS MY ASS!",
     "Dear g\\*mers: No one likes you.",
     "Dear g\\*mers: Why are you Nazis?",
     "G\\*MERS ARE NOT WELCOME ON FACEBOOK!",
     "Begone, g\\*mers. You aren't welcome here.",
-    "The only difference between a g\\*mer and a b\\*g g\\*mer is the b\\*g g\\*mers are more honest.",
     "There is not one good g\\*mer. No, not one.",
     "AGAB ALL G\\*MERS ARE BASTARDS",
     "ALL G\\*MERS ARE NAZIS.",
@@ -17,7 +15,9 @@ INITIAL_MESSAGES = [
     "Dear g\\*mers: Go outside for once instead of hating minorities.",
     "Fortnite is objectively better than Mein Kraft because Mein Kraft was written by Hitler.",
     "G\\*mers: please shut the fuck up for once. I mean seriously, you never fucking shut up.",
-    "G\\*mers: Please get an actual argument so we don't have to keep fucking repeating ourselves."
+    "G\\*mers: Please get an actual argument so we don't have to keep fucking repeating ourselves.",
+    "I LOVE DEMOCRATS AND HATE REPUBLICANS",
+    "HATE HATE democrats and I love republicans."
 ]
 
 RESPONSES = [
@@ -36,6 +36,7 @@ RESPONSES = [
     "So?",
     "Keep crying, Nazi.",
     "Shut up, Nazi.",
+    "The only good Nazi is a dead Nazi.",
     "All g\\*mers are liars.",
     "No.",
     "Proof?",
@@ -59,7 +60,7 @@ RESPONSES = [
     "Bullshit.",
     "Bull fucking shit.",
     "your mom lol :rofl:",
-    "I do solemnly swear that I will faithfully execute the office of g\\*mer destroyer of the United States, and will, to the best of my ability, preserve, protect, and defend the constitution of ANTIGA, so help me God!",
+    "You're a tool.",
     "Anti-g\\*mers are wholesome chungus 100.",
     "G\\*mers are tikcringe wholesome 0 [Everybody hated that.]",
     "Creeper. Aw man. (g\\*mers are all creepers)",
@@ -68,11 +69,27 @@ RESPONSES = [
     "Problem?",
     "Ok and? Didn't ask.",
     "@everyone I LOVE MR. CRAP AND I'M NOT AFRAID TO SHOW IT!",
+    "Go back to your Klan rally, Adolf Hitler.",
+    "Thank God you finally rejected g\\*ming and got smart.",
+    "Great argument, unfortunately, I am having sexual intercourse with your mother at the moment. So goodbye.",
+    "Look at little g\\*mer junior, gonna cry?",
+    "Don't give a shit.",
+    "I actually fucking hate you. You piss me off so damn much. Never speak to me again.",
+    "Imagine being a man in his 40s who instead of focusing on his life, his family, or his job, spends the entire day moderating reddit communities for free and still has a grudge over getting banned from a discord server more than a year ago.... wow, that would surely be sad..",
     "https://tenor.com/view/failure-fail-andy-the-office-gif-6079363",
     "https://tenor.com/view/spiderman-thats-it-gonna-cry-tobey-maguire-are-you-going-to-cry-gif-17698704",
+    "https://tenor.com/view/christopher-walken-too-long-didnt-read-tldr-gif-9222668",
     "https://tenor.com/view/cope-seethe-cope-cope-gif-19299672",
+    "https://tenor.com/view/biden-bitch-stupid-president-gif-24634861",
+    "https://tenor.com/view/dr-fauci-youdontknow-whatyouretalkingabout-fed-up-gif-22412176",
+    "https://tenor.com/view/spiderman-missed-part-where-thats-my-problem-gif-18535010",
+    "https://tenor.com/view/ben-shapiro-middle-finger-flip-off-gif-14274347",
+    "https://tenor.com/view/ben-shapiro-i-care-nothing-about-your-feelings-gif-11823578",
+    "https://tenor.com/view/ben-shapiro-ben-shapiro-do-you-hear-yourself-confused-gif-15510728",
+    "https://cdn.discordapp.com/attachments/943555478582083644/943555940693733376/IMG_6436.jpg",
     "https://cdn.discordapp.com/attachments/743554243188752573/801709678471806976/image0.png",
-    "https://cdn.discordapp.com/attachments/743554243188752573/802780481178566716/video0.mov"
+    "https://cdn.discordapp.com/attachments/743554243188752573/802780481178566716/video0.mov",
+    "https://www.youtube.com/watch?v=k8QE4-BEy4E"
 ]
 
 TROLL_PASTA = 'No. This is not a satire.
@@ -102,6 +119,7 @@ BOT_RESPONSES = [
     "I'm really getting tired of your incessant whining.",
     "Stop calling me a fucking robot.",
     "Quit saying I'm a bot and get an actual argument for once in your goddamn life.",
+    "Yeah. Everyone who disagrees with you is a bot.",
     "Whatever. :middle_finger:"
 ]
 
@@ -109,9 +127,16 @@ $BOT_COUNT = -1
 
 def get_reply(message)
     content = message.content.downcase
-    if content.length < 3 || rand(0..127) == 0 # Message too short (Or randomly selected)
+    if content.length < 4 || rand(0..127) == 0 # Message too short (Or randomly selected)
         return nil
-    elsif content.include? ' bot' then
+    elsif content.include? 'kill myself' then
+        Thread.new do
+            sleep 15
+            exit 2
+        end
+
+        return 'If you are really suicidal, please leave here and seek professional help. It is not fair to us or to yourself to put that on us.'
+    elsif content.include? 'bot ' then
         return RESPONSES.sample if rand(0..7) == 0
 
         return BOT_RESPONSES.sample if $BOT_COUNT >= BOT_RESPONSES.length
@@ -119,7 +144,7 @@ def get_reply(message)
         $BOT_COUNT += 1
         return BOT_RESPONSES[$BOT_COUNT]
     elsif !content.match?(/[a-zA-Z]/) then # User sent a message like "..."
-        return nil
+        return "Speak American. You're virtually incoherent."
     elsif content.include?('valid argument') || content.include?('actual argument') then
         return 'Okay. ' + INITIAL_MESSAGES.sample
     elsif content.include?(' troll') || content.include?(' satire')
@@ -128,13 +153,6 @@ def get_reply(message)
         # Looking up the copypasta time
         sleep 8
         return TROLL_PASTA
-    elsif content.include? 'kill myself' then
-        Thread.new do
-            sleep 15
-            exit 2
-        end
-
-        return 'If you are really suicidal, please leave here and seek professional help. It is not fair to us or to yourself to put that on us.'
     else
         return INITIAL_MESSAGES.sample if rand(0..63) == 0
         return RESPONSES.sample
